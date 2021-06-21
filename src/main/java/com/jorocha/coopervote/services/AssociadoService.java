@@ -57,6 +57,7 @@ public class AssociadoService {
 
 	public void delete(String id) {
 		findById(id);
+		LOG.info(">>> Exclusão do associado: ".concat(id));
 		associadoRepository.deleteById(id);
 	}
 
@@ -68,6 +69,7 @@ public class AssociadoService {
 		validarCpf(associadoDTO);
 		
 		updateData(newObj, associado);
+		LOG.info(">>> Atualização do associado: ".concat(associado.getId()));
 		return associadoRepository.save(newObj);
 	}
 

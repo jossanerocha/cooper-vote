@@ -97,12 +97,14 @@ public class VotoService {
 
 	public void delete(String id) {
 		findById(id);
+		LOG.info(">>> Exclusão do voto: ".concat(id));
 		votoRepository.deleteById(id);
 	}
 
 	public Voto update(Voto obj) {
 		Voto newObj = findById(obj.getId());
 		updateData(newObj, obj);
+		LOG.info(">>> Atualização do voto: ".concat(obj.getId()));
 		return votoRepository.save(newObj);
 	}
 
