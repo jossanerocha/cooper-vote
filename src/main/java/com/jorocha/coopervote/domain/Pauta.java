@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.Min;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,7 +22,10 @@ public class Pauta implements Serializable {
 	private Date data;
 	private String titulo;
 	private String descricao;
+	
+	@Min(value = 1, message = "O tempo de duração da sessão deve ser no mínimo de um minuto")
 	private Integer duracaoSessao;
+	
 	private LocalDateTime inicioSessao;
 	private LocalDateTime fimSessao;
 	

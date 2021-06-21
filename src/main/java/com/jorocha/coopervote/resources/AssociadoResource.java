@@ -21,6 +21,10 @@ import com.jorocha.coopervote.domain.Associado;
 import com.jorocha.coopervote.dto.AssociadoDTO;
 import com.jorocha.coopervote.services.AssociadoService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(value="/associados")
 public class AssociadoResource {
@@ -28,6 +32,12 @@ public class AssociadoResource {
 	@Autowired
 	private AssociadoService service;
 	
+	@ApiOperation(value = "Retorna uma lista de associados")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna a lista de associados"),
+		    @ApiResponse(code = 403, message = "Sem permissão para acessar a lista de associados"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})	
 	@RequestMapping(method=RequestMethod.GET)
  	public ResponseEntity<List<AssociadoDTO>> findAll() {
 		List<Associado> list = service.findAll();
@@ -35,12 +45,24 @@ public class AssociadoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 
+	@ApiOperation(value = "Retorna um associado a partir de um idAssociado")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Pauta encontrada"),
+		    @ApiResponse(code = 403, message = "Sem permissão para acessar a pauta"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})	
 	@GetMapping(value = "/{id}")
  	public ResponseEntity<AssociadoDTO> findById(@PathVariable String id) {
 		Associado obj = service.findById(id);
 		return ResponseEntity.ok().body(new AssociadoDTO(obj));
 	}
 
+	@ApiOperation(value = "Insere um associado")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Associado inserido"),
+		    @ApiResponse(code = 403, message = "Sem permissão para inserir um associado"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})		
 	@RequestMapping(method=RequestMethod.POST)
  	public ResponseEntity<Void> insert(@RequestBody AssociadoDTO associadoDTO) throws OAuthSystemException, OAuthProblemException, IOException {
 		Associado associado = service.fromDTO(associadoDTO);
@@ -49,16 +71,28 @@ public class AssociadoResource {
 		return ResponseEntity.created(uri).build();			
 	}
 
+	@ApiOperation(value = "Deleta um associado")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Associado deletado"),
+		    @ApiResponse(code = 403, message = "Sem permissão para deletar um associado"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
  	public ResponseEntity<Void> delete(@PathVariable String id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 
+	@ApiOperation(value = "Atualiza os dados de um associado")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Associado atualizado"),
+		    @ApiResponse(code = 403, message = "Sem permissão para atualizar um associado"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
- 	public ResponseEntity<Void> update(@RequestBody AssociadoDTO objDto, @PathVariable String id) throws OAuthSystemException, OAuthProblemException, IOException {
-		Associado obj = service.fromDTO(objDto);
-		obj.setId(id);
+ 	public ResponseEntity<Void> update(@RequestBody AssociadoDTO associadoDTO, @PathVariable String idAssociado) throws OAuthSystemException, OAuthProblemException, IOException {
+		Associado obj = service.fromDTO(associadoDTO);
+		obj.setId(idAssociado);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
