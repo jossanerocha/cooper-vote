@@ -32,15 +32,33 @@ public class AssociadoService {
 	@Autowired
 	private AssociadoRepository associadoRepository;
 
+	/**
+	 * Retorna uma lista de associados
+	 *
+	 * @param 
+	 * @return List<Associado>
+	 */
 	public List<Associado> findAll() {
 		return associadoRepository.findAll();
 	}
 
+	/**
+	 * Busca um associado
+	 *
+	 * @param idAssociado
+	 * @return Associado
+	 */		
 	public Associado findById(String id) {
 		Optional<Associado> obj = associadoRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Associado não encontrado"));
 	}
 
+	/**
+	 * Insere um associado
+	 *
+	 * @param Associado
+	 * @return Associado
+	 */		
 	public Associado insert(Associado associado) throws OAuthSystemException, OAuthProblemException, IOException {
 		AssociadoDTO associadoDTO = new AssociadoDTO();
 		BeanUtils.copyProperties(associado, associadoDTO);
@@ -55,12 +73,24 @@ public class AssociadoService {
 		return associadoRepository.insert(associado);
 	}
 
+	/**
+	 * Excluir um associado
+	 *
+	 * @param idAssociado
+	 * @return void
+	 */	
 	public void delete(String id) {
 		findById(id);
 		LOG.info(">>> Exclusão do associado: ".concat(id));
 		associadoRepository.deleteById(id);
 	}
 
+	/**
+	 * Atualiza os dados de um associado
+	 *
+	 * @param Associado
+	 * @return Associado
+	 */		
 	public Associado update(Associado associado) throws OAuthSystemException, OAuthProblemException, IOException {
 		Associado newObj = findById(associado.getId());
 		
@@ -73,15 +103,35 @@ public class AssociadoService {
 		return associadoRepository.save(newObj);
 	}
 
+	/**
+	 * Copia os dados atualizados para o objeto Associado
+	 *
+	 * @param new Associado
+	 * @param Associado
+	 * @return void
+	 */	
 	private void updateData(Associado newAssociado, Associado associado) {
 		BeanUtils.copyProperties(associado, newAssociado);
 	}
 
+	/**
+	 * Cria um objeto Associado a partir de um DTO
+	 *
+	 * @param AssociadoDTO
+	 * @return Associado
+	 */		
 	public Associado fromDTO(AssociadoDTO associadoDTO) throws OAuthSystemException, OAuthProblemException, IOException {		
 		UsuarioCpfDTO usuarioCpfDTO = validarCpf(associadoDTO);
 		return new Associado(null, usuarioCpfDTO.getNome(), usuarioCpfDTO.getNome().trim().concat("@gmail.com") , usuarioCpfDTO.getCPF());
 	}
 
+	/**
+	 * Valida o número de CPF do associado
+	 *
+	 * @param AssociadoDTO
+	 * @return UsuarioCpfDTO
+	 * @see ClienteApiCpfLight
+	 */	
 	private UsuarioCpfDTO validarCpf(AssociadoDTO associadoDTO) throws OAuthSystemException, OAuthProblemException, IOException {
 		String json = ClienteApiCpfLight.consultaCpf(associadoDTO.getCpf());
 		List<UsuarioCpfDTO> lstUsuarioCPF = JSONUtils.json2ListObject(json, UsuarioCpfDTO.class);

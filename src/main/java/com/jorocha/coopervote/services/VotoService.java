@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -40,15 +41,34 @@ public class VotoService {
 	@Autowired
 	private PautaService pautaService;	
 	
+	/**
+	 * Lista os votos de todas as pautas
+	 *
+	 * @param 
+	 * @return List<Voto>
+	 */	
 	public List<Voto> findAll() {
 		return votoRepository.findAll();
 	}	
 	
+	/**
+	 * Busca um voto
+	 *
+	 * @param idVoto
+	 * @return Voto
+	 */		
 	public Voto findById(String id) {
 		Optional<Voto> obj = votoRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Voto não encontrado"));
 	}
 	
+	/**
+	 * Insere o voto em uma pauta
+	 *
+	 * @param Voto
+	 * @param idPauta
+	 * @return Voto
+	 */		
 	public Voto insert(Voto voto, String idPauta) {
 		verificarVotacaoPauta(idPauta, voto.getAssociado().getCpf());
 		
@@ -73,6 +93,14 @@ public class VotoService {
 		}
 	}
 
+	/**
+	 * Validações da pauta: existência, duração e intervalo para votação
+	 * Valida se o associado já votou
+	 *
+	 * @param idPauta
+	 * @param cpfAssociado
+	 * @return void
+	 */	
 	private void verificarVotacaoPauta(String idPauta, String cpfAssociado) {
 		Pauta pauta = pautaService.findById(idPauta);
 		if(pauta == null) {
@@ -95,12 +123,24 @@ public class VotoService {
 		}
 	}
 
+	/**
+	 * Deleta o voto de uma pauta
+	 *
+	 * @param idVoto
+	 * @return void
+	 */		
 	public void delete(String id) {
 		findById(id);
 		LOG.info(">>> Exclusão do voto: ".concat(id));
 		votoRepository.deleteById(id);
 	}
 
+	/**
+	 * Atualiza o voto de uma pauta
+	 *
+	 * @param idVoto
+	 * @return Voto
+	 */		
 	public Voto update(Voto obj) {
 		Voto newObj = findById(obj.getId());
 		updateData(newObj, obj);
@@ -108,11 +148,24 @@ public class VotoService {
 		return votoRepository.save(newObj);
 	}
 
-	private void updateData(Voto data, Voto Voto) {
-		data.setIndVoto(Voto.getIndVoto());
-		data.setAssociado(Voto.getAssociado());
+	/**
+	 * Copia os dados atualizados para o objeto Voto
+	 *
+	 * @param new Voto
+	 * @param Voto
+	 * @return void
+	 */		
+	private void updateData(Voto newVoto, Voto Voto) {
+		newVoto.setIndVoto(Voto.getIndVoto());
+		newVoto.setAssociado(Voto.getAssociado());
 	}
 
+	/**
+	 * Cria um objeto Voto a partir de um DTO
+	 *
+	 * @param VotoDTO
+	 * @return Voto
+	 */	
 	public Voto fromDTO(VotoDTO votoDTO) {
 		return new Voto(votoDTO.getId(), votoDTO.getIndVoto(), votoDTO.getAssociado());
 	}

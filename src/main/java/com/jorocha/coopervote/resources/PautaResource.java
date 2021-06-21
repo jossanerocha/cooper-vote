@@ -112,7 +112,7 @@ public class PautaResource {
 		return ResponseEntity.noContent().build();
 	}	
 	
-	@ApiOperation(value = "Busca uma pauta por termo contido no título")
+	@ApiOperation(value = "Lista pautas por termo contido no título")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Pauta encontrada"),
 		    @ApiResponse(code = 403, message = "Sem permissão efetuar a busca"),
@@ -125,7 +125,7 @@ public class PautaResource {
 		return ResponseEntity.ok().body(list);
 	}
 
-	@ApiOperation(value = "Busca uma pauta por termo contido no título ou descrição e entre um periodo de datas")
+	@ApiOperation(value = "Lista pautas por termo contido no título ou descrição e entre um periodo de datas")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Pauta encontrada"),
 		    @ApiResponse(code = 403, message = "Sem permissão efetuar a busca"),
