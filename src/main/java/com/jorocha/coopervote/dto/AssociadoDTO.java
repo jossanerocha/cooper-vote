@@ -9,7 +9,7 @@ public class AssociadoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
-	private String name;
+	private String nome;
 	private String email;
 	private String cpf;
 	
@@ -18,7 +18,7 @@ public class AssociadoDTO implements Serializable {
 	
 	public AssociadoDTO(Associado obj) {
 		this.id = obj.getId();
-		this.name = obj.getNome();
+		this.nome = obj.getNome();
 		this.email = obj.getEmail();
 		this.cpf = obj.getCpf();
 	}
@@ -31,12 +31,12 @@ public class AssociadoDTO implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {

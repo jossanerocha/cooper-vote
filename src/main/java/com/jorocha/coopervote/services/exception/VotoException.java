@@ -1,10 +1,10 @@
 package com.jorocha.coopervote.services.exception;
 
-public class CpfInvalidoException extends RuntimeException{
+public class VotoException extends RuntimeException{
 	
 	private static final long serialVersionUID = 1L;
 
-	public CpfInvalidoException(String message) {
+	public VotoException(String message) {
 		super(message);
 	}
 	

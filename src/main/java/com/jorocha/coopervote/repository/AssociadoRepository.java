@@ -7,5 +7,7 @@ import com.jorocha.coopervote.domain.Associado;
 
 @Repository
 public interface AssociadoRepository extends MongoRepository<Associado, String> {
+	
+	Associado findByCpf(String cpf);
 
 }

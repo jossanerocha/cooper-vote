@@ -1,9 +1,12 @@
 package com.jorocha.coopervote.resources;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +24,7 @@ import com.jorocha.coopervote.services.AssociadoService;
 @RestController
 @RequestMapping(value="/associados")
 public class AssociadoResource {
-
+	
 	@Autowired
 	private AssociadoService service;
 	
@@ -39,7 +42,7 @@ public class AssociadoResource {
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
- 	public ResponseEntity<Void> insert(@RequestBody AssociadoDTO associadoDTO) {
+ 	public ResponseEntity<Void> insert(@RequestBody AssociadoDTO associadoDTO) throws OAuthSystemException, OAuthProblemException, IOException {
 		Associado associado = service.fromDTO(associadoDTO);
 		associado = service.insert(associado);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(associado.getId()).toUri();
@@ -53,7 +56,7 @@ public class AssociadoResource {
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
- 	public ResponseEntity<Void> update(@RequestBody AssociadoDTO objDto, @PathVariable String id) {
+ 	public ResponseEntity<Void> update(@RequestBody AssociadoDTO objDto, @PathVariable String id) throws OAuthSystemException, OAuthProblemException, IOException {
 		Associado obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
