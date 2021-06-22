@@ -48,7 +48,6 @@ public class ClienteApiCpfLight {
 		post.addHeader("x-cpf-usuario", "00000000191");
 		post.addHeader("Authorization", "Bearer " + token.getAccessToken());
 
-		//"{\"listaCpf\": [\"00000000272\",\"00000000353\",\"00000000434\"]}";
 		String body = "{\"listaCpf\": [\""+cpf+"\"]}";
 		post.setEntity(new StringEntity(body));
 

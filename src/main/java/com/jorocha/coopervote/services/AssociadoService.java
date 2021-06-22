@@ -132,7 +132,7 @@ public class AssociadoService {
 	 * @return UsuarioCpfDTO
 	 * @see ClienteApiCpfLight
 	 */	
-	private UsuarioCpfDTO validarCpf(AssociadoDTO associadoDTO) throws OAuthSystemException, OAuthProblemException, IOException {
+	public UsuarioCpfDTO validarCpf(AssociadoDTO associadoDTO) throws OAuthSystemException, OAuthProblemException, IOException {
 		String json = ClienteApiCpfLight.consultaCpf(associadoDTO.getCpf());
 		List<UsuarioCpfDTO> lstUsuarioCPF = JSONUtils.json2ListObject(json, UsuarioCpfDTO.class);
 		UsuarioCpfDTO usuarioCpfDTO = lstUsuarioCPF.stream().findFirst().orElse(null);
