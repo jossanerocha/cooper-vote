@@ -70,10 +70,7 @@ public class VotoService {
 	public Voto insert(Voto voto, String idPauta) {
 		verificarVotacaoPauta(idPauta, voto.getAssociado().getCpf());
 		
-		if(!voto.getIndVoto().equalsIgnoreCase("Sim") || !voto.getIndVoto().equalsIgnoreCase("Sim")) {
-			LOG.error("Erro ao registrar voto. Tipo de voto inválido.");
-			throw new VotoException("Tipos válidos de voto: Sim/Não");
-		}
+		verificarTipoVoto(voto);
 		
 		try {
 			String json = restTemplate.getForObject(URL_USER_INFO.concat(voto.getAssociado().getCpf()), String.class);
@@ -88,6 +85,13 @@ public class VotoService {
 		} catch (Exception e) {
 			LOG.error("CPF não encontrado: ".concat(voto.getAssociado().getCpf()));
 			throw new CpfInvalidoException("CPF não encontrado");
+		}
+	}
+
+	public void verificarTipoVoto(Voto voto) {
+		if(!voto.getIndVoto().equalsIgnoreCase("Sim") && !voto.getIndVoto().equalsIgnoreCase("Não")) {
+			LOG.error("Erro ao registrar voto. Tipo de voto inválido.");
+			throw new VotoException("Tipos válidos de voto: Sim/Não");
 		}
 	}
 
@@ -150,12 +154,13 @@ public class VotoService {
 	 * Copia os dados atualizados para o objeto Voto
 	 *
 	 * @param new Voto
-	 * @param Voto
+	 * @param voto
 	 * @return void
 	 */		
-	private void updateData(Voto newVoto, Voto Voto) {
-		newVoto.setIndVoto(Voto.getIndVoto());
-		newVoto.setAssociado(Voto.getAssociado());
+	private void updateData(Voto newVoto, Voto voto) {
+		verificarTipoVoto(voto);
+		newVoto.setIndVoto(voto.getIndVoto());
+		newVoto.setAssociado(voto.getAssociado());
 	}
 
 	/**
