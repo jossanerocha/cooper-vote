@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,7 +15,6 @@ import com.jorocha.coopervote.domain.Voto;
 import com.jorocha.coopervote.dto.UserInfo;
 import com.jorocha.coopervote.dto.VotoDTO;
 import com.jorocha.coopervote.repository.VotoRepository;
-import com.jorocha.coopervote.resources.AssociadoResource;
 import com.jorocha.coopervote.resources.util.JSONUtils;
 import com.jorocha.coopervote.services.exception.CpfInvalidoException;
 import com.jorocha.coopervote.services.exception.ObjectNotFoundException;
@@ -30,7 +28,7 @@ public class VotoService {
 	
 	private static final String URL_USER_INFO = "https://user-info.herokuapp.com/users/";
 	
-	private static Logger LOG = LoggerFactory.getLogger(AssociadoResource.class);
+	private static Logger LOG = LoggerFactory.getLogger(VotoService.class);
 
 	@Autowired
 	private VotoRepository votoRepository;	

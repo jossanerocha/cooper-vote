@@ -7,20 +7,18 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jorocha.coopervote.domain.Pauta;
 import com.jorocha.coopervote.dto.PautaDTO;
 import com.jorocha.coopervote.repository.PautaRepository;
-import com.jorocha.coopervote.resources.AssociadoResource;
 import com.jorocha.coopervote.services.exception.ObjectNotFoundException;
 
 @Service
 public class PautaService {
 	
-	private static Logger LOG = LoggerFactory.getLogger(AssociadoResource.class);
+	private static Logger LOG = LoggerFactory.getLogger(PautaService.class);
 
 	@Autowired
 	private PautaRepository pautaRepository;
