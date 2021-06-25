@@ -1,4 +1,4 @@
-package com.jorocha.coopervote.config;
+package com.jorocha.coopervote.config.kafka;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +14,7 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.jorocha.coopervote.domain.Associado;
+import com.jorocha.coopervote.domain.Pauta;
 
 @Configuration
 public class KafkaProducerConfig {
@@ -47,4 +48,18 @@ public class KafkaProducerConfig {
     public KafkaTemplate<String, Associado> associadoKafkaTemplate() {
         return new KafkaTemplate<>(associadoProducerFactory());
     }
+    
+	@Bean
+    public ProducerFactory<String, Pauta> sessaoProducerFactory() {
+        Map<String, Object> configProps = new HashMap<>();
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new DefaultKafkaProducerFactory<>(configProps);
+    }
+
+    @Bean
+    public KafkaTemplate<String, Pauta> sessaoKafkaTemplate() {
+        return new KafkaTemplate<>(sessaoProducerFactory());
+    }    
 }

@@ -10,6 +10,10 @@
 
 <p align="left">Consiste em uma aplicação para administração de assembléias, onde cada associado possui um voto por sessão de votação.</p>
 
+<p align="left"></p>
+
+<p align="left">Porta: 9000</p>
+
 
 <p align="left">Lista de CPF's (máximo 50) para utilização na <a href="https://www.gov.br/conecta/catalogo/apis/cadastro-base-do-cidadao-cbc-cpf/swagger_view">API CPF Light<a/></p>
 

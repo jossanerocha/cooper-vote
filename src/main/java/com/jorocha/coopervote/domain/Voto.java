@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection="voto")
 public class Voto implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.jorocha.coopervote.services.exception.AssociadoException;
 import com.jorocha.coopervote.services.exception.CpfInvalidoException;
+import com.jorocha.coopervote.services.exception.LoginException;
 import com.jorocha.coopervote.services.exception.ObjectNotFoundException;
 import com.jorocha.coopervote.services.exception.PautaFechadaException;
 import com.jorocha.coopervote.services.exception.PautaNotFoundException;
@@ -61,9 +62,16 @@ public class ExceptionHandlerResource {
 	}	
 	
 	@ExceptionHandler(AssociadoException.class)
-	public ResponseEntity<Error> associadoCasdastrado(AssociadoException associado, HttpServletRequest request) {		
-		HttpStatus status = HttpStatus.FORBIDDEN;
-		Error err = new Error(System.currentTimeMillis(), status.value(), "Associado cadastrado", associado.getMessage(), request.getRequestURI());
+	public ResponseEntity<Error> associadoNaoCasdastrado(AssociadoException associado, HttpServletRequest request) {		
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		Error err = new Error(System.currentTimeMillis(), status.value(), "Associado não cadastrado", associado.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}	
+	
+	@ExceptionHandler(LoginException.class)
+	public ResponseEntity<Error> login(LoginException login, HttpServletRequest request) {		
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		Error err = new Error(System.currentTimeMillis(), status.value(), "Falha no login", login.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}		
 }

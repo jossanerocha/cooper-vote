@@ -1,4 +1,4 @@
-package com.jorocha.coopervote.config;
+package com.jorocha.coopervote.config.security;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,5 +1,6 @@
 package com.jorocha.coopervote.services;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jorocha.coopervote.config.kafka.KafKaProducerService;
 import com.jorocha.coopervote.domain.Pauta;
 import com.jorocha.coopervote.dto.PautaDTO;
 import com.jorocha.coopervote.repository.PautaRepository;
@@ -22,6 +24,9 @@ public class PautaService {
 
 	@Autowired
 	private PautaRepository pautaRepository;
+	
+	@Autowired
+	private KafKaProducerService producerService;	
 	
 	/**
 	 * Lista de pautas
@@ -59,6 +64,21 @@ public class PautaService {
 		pauta.setDuracaoSessao(numMinutos);
 		return update(pauta);
 	}
+	
+	/**
+	 * Fechamento da sessão de votação de uma pauta
+	 *
+	 * @param idPauta
+	 * @return Pauta
+	 */	
+	public Pauta fecharSessao(String id) {
+		LOG.info(">>> Fechamento de sessão da pauta: ".concat(id));
+		Pauta pauta = findById(id);
+		pauta.setFimSessao(LocalDateTime.now());
+		pauta = pautaRepository.save(pauta);
+		producerService.fecharSessao(pauta);
+		return pauta;
+	}	
 	
 	/**
 	 * Insere uma nova pauta

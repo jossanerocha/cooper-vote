@@ -11,12 +11,14 @@ import org.springframework.context.annotation.Configuration;
 
 import com.jorocha.coopervote.domain.Associado;
 import com.jorocha.coopervote.domain.Pauta;
+import com.jorocha.coopervote.domain.User;
 import com.jorocha.coopervote.domain.Voto;
 import com.jorocha.coopervote.repository.AssociadoRepository;
 import com.jorocha.coopervote.repository.PautaRepository;
+import com.jorocha.coopervote.repository.UserRepository;
 import com.jorocha.coopervote.repository.VotoRepository;
 
-//@Configuration
+@Configuration
 public class Instatiation implements CommandLineRunner{
 	
 	@Autowired
@@ -28,12 +30,21 @@ public class Instatiation implements CommandLineRunner{
 	@Autowired
 	private VotoRepository votoRepository;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
+		userRepository.deleteAll();
 		associadoRepository.deleteAll();
 		votoRepository.deleteAll();
 		pautaRepository.deleteAll();
+		
+		User user = new User();
+		user.setUsername("user001");
+		user.setPassword("user001");
+		userRepository.save(user);
 		
 		Associado associado001 = new Associado(null, "Pedro", "associado001@gmail.com", "00000000272");
 		Associado associado002 = new Associado(null, "Jonas", "associado002@gmail.com", "00000000353");

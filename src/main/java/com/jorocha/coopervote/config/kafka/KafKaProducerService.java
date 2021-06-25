@@ -1,4 +1,4 @@
-package com.jorocha.coopervote.services;
+package com.jorocha.coopervote.config.kafka;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import com.jorocha.coopervote.domain.Associado;
+import com.jorocha.coopervote.domain.Pauta;
 
 @Service
 public class KafKaProducerService {
@@ -25,9 +26,15 @@ public class KafKaProducerService {
 
 	@Value(value = "${associado.topic.name}")
 	private String associadoTopicName;
+	
+	@Value(value = "${sessao.topic.name}")
+	private String sessaoTopicName;	
 
 	@Autowired
 	private KafkaTemplate<String, Associado> associadoKafkaTemplate;
+	
+	@Autowired
+	private KafkaTemplate<String, Pauta> sessaoKafkaTemplate;	
 
 	public void sendMessage(String message) {
 		ListenableFuture<SendResult<String, String>> future = this.kafkaTemplate.send(topicName, message);
@@ -60,5 +67,21 @@ public class KafKaProducerService {
 			}
 		});
 	}
+	
+	public void fecharSessao(Pauta pauta) {
+		ListenableFuture<SendResult<String, Pauta>> future = this.sessaoKafkaTemplate.send(sessaoTopicName, pauta);
+
+		future.addCallback(new ListenableFutureCallback<SendResult<String, Pauta>>() {
+			@Override
+			public void onSuccess(SendResult<String, Pauta> result) {
+				LOG.info("Sessão fechada: " + pauta + " offset: " + result.getRecordMetadata().offset());
+			}
+
+			@Override
+			public void onFailure(Throwable ex) {
+				LOG.error("Falha ao fechar sessão : " + pauta, ex);
+			}
+		});
+	}	
 
 }

@@ -1,4 +1,4 @@
-package com.jorocha.coopervote.services;
+package com.jorocha.coopervote.config.kafka;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import com.jorocha.coopervote.domain.Associado;
+import com.jorocha.coopervote.domain.Pauta;
 @Service
 public class KafKaConsumerService {
 	private static Logger LOG = LoggerFactory.getLogger(KafKaConsumerService.class);
@@ -19,4 +20,9 @@ public class KafKaConsumerService {
 	public void consume(Associado associado) {
 		LOG.info(String.format("Associado criado -> %s %s", associado.getNome(), associado.getCpf()));
 	}
+	
+	@KafkaListener(topics = "${sessao.topic.name}", groupId = "${sessao.topic.group.id}", containerFactory = "sessaoKafkaListenerContainerFactory")
+	public void consume(Pauta pauta) {
+		LOG.info(String.format("Sessão fechada -> %s - %s", pauta.getTitulo(), pauta.getDescricao()));
+	}	
 }

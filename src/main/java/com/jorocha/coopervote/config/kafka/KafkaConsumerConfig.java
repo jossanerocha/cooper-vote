@@ -1,4 +1,4 @@
-package com.jorocha.coopervote.config;
+package com.jorocha.coopervote.config.kafka;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +14,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import com.jorocha.coopervote.domain.Associado;
+import com.jorocha.coopervote.domain.Pauta;
 
 @Configuration
 public class KafkaConsumerConfig {
@@ -25,6 +26,9 @@ public class KafkaConsumerConfig {
 
 	@Value(value = "${associado.topic.group.id}")
 	private String associadoGroupId;
+	
+	@Value(value = "${sessao.topic.group.id}")
+	private String sessaoGroupId;	
 
 	@Bean
 	public ConsumerFactory<String, String> consumerFactory() {
@@ -59,4 +63,20 @@ public class KafkaConsumerConfig {
 		factory.setConsumerFactory(associadoConsumerFactory());
 		return factory;
 	}
+	
+	public ConsumerFactory<String, Pauta> sessaoConsumerFactory() {
+		Map<String, Object> props = new HashMap<>();
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, sessaoGroupId);
+		props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+		return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(),
+				new JsonDeserializer<>(Pauta.class));
+	}
+
+	@Bean
+	public ConcurrentKafkaListenerContainerFactory<String, Pauta> sessaoKafkaListenerContainerFactory() {
+		ConcurrentKafkaListenerContainerFactory<String, Pauta> factory = new ConcurrentKafkaListenerContainerFactory<>();
+		factory.setConsumerFactory(sessaoConsumerFactory());
+		return factory;
+	}	
 }

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jorocha.coopervote.config.ClienteApiCpfLight;
+import com.jorocha.coopervote.config.kafka.KafKaProducerService;
 import com.jorocha.coopervote.domain.Associado;
 import com.jorocha.coopervote.dto.AssociadoDTO;
 import com.jorocha.coopervote.dto.UsuarioCpfDTO;
@@ -31,6 +32,9 @@ public class AssociadoService {
 	
 	@Autowired
 	private AssociadoRepository associadoRepository;
+	
+	@Autowired
+	private KafKaProducerService producerService;
 
 	/**
 	 * Retorna uma lista de associados
@@ -70,7 +74,10 @@ public class AssociadoService {
 			throw new AssociadoException("CPF já cadastrado");
 		}
 		
-		return associadoRepository.insert(associado);
+		associado = associadoRepository.insert(associado);		
+		producerService.saveAssociado(associadoCadastrado);
+		
+		return associado;
 	}
 
 	/**

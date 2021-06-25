@@ -1,13 +1,14 @@
-package com.jorocha.coopervote.resources;
+package com.jorocha.coopervote.config.kafka;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jorocha.coopervote.domain.Associado;
-import com.jorocha.coopervote.services.KafKaProducerService;
+import com.jorocha.coopervote.domain.Pauta;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -29,7 +30,7 @@ public class KafkaProducerResource {
 		this.producerService.sendMessage(message);
 	}
 
-	@ApiOperation(value = "Criação da mensagem")
+	@ApiOperation(value = "Criação da mensagem de criação de associado")
 	@PostMapping(value = "/criarAssociado")
 	public void enviarParaTopic(
 			@RequestParam("id") String id, 
@@ -42,4 +43,10 @@ public class KafkaProducerResource {
 		associado.setNome(nome);
 		this.producerService.saveAssociado(associado);
 	}
+	
+	@ApiOperation(value = "Criação da mensagem de fechamento de sessão")
+	@PostMapping(value = "/fecharSessao")
+	public void enviarParaTopic(@RequestBody Pauta pauta){
+		this.producerService.fecharSessao(pauta);
+	}	
 }

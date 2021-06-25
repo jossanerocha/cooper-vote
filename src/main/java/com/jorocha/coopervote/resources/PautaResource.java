@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,7 @@ import com.jorocha.coopervote.dto.PautaDTO;
 import com.jorocha.coopervote.resources.util.Data;
 import com.jorocha.coopervote.resources.util.URL;
 import com.jorocha.coopervote.services.PautaService;
+import com.mongodb.lang.NonNull;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -66,11 +69,23 @@ public class PautaResource {
 	})	
 	@RequestMapping(value="/abrirSessao", method=RequestMethod.GET)
  	public ResponseEntity<Pauta> abrirSessao(
- 			@RequestParam(value = "idPauta" ) String id, 
- 			@RequestParam(value = "numMinutos", defaultValue = "1") Integer numMinutos){
+ 			@Valid @NonNull@RequestParam(value = "idPauta" ) String id, 
+ 			@Valid @NonNull@RequestParam(value = "numMinutos", defaultValue = "1") Integer numMinutos){
 		Pauta pauta = service.abrirSessao(id, numMinutos);
 		return ResponseEntity.ok().body(pauta);
-	}	
+	}
+	
+	@ApiOperation(value = "Fecha a sessão de uma pauta")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Sessão aberta"),
+		    @ApiResponse(code = 403, message = "Sem permissão para abrir a sessão"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})	
+	@RequestMapping(value="/fecharSessao", method=RequestMethod.GET)
+ 	public ResponseEntity<Pauta> fecharSessao(@Valid @NonNull@RequestParam(value = "idPauta" ) String id){
+		Pauta pauta = service.fecharSessao(id);
+		return ResponseEntity.ok().body(pauta);
+	}
 	
 	@ApiOperation(value = "Insere uma pauta")
 	@ApiResponses(value = {
