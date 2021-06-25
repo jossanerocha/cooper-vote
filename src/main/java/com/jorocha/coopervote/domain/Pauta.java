@@ -23,7 +23,7 @@ public class Pauta implements Serializable {
 	private String titulo;
 	private String descricao;
 	
-	@Min(value = 1, message = "O tempo de duração da sessão deve ser no mínimo de um minuto")
+	@Min(value = 1, message = "O tempo de duracao da sessï¿½o deve ser no mï¿½nimo de um minuto")
 	private Integer duracaoSessao;
 	
 	private LocalDateTime inicioSessao;

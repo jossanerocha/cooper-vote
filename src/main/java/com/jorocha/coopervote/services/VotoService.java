@@ -62,7 +62,7 @@ public class VotoService {
 	 */		
 	public Voto findById(String id) {
 		Optional<Voto> obj = votoRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Voto não encontrado"));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Voto nao encontrado"));
 	}
 	
 	/**
@@ -84,13 +84,13 @@ public class VotoService {
 			if(userInfo != null && userInfo.isAbleToVote()) {
 				return votoRepository.insert(voto);
 			}else {
-				LOG.error("Associado não habilitado para votar: ".concat(associado.getCpf()));
+				LOG.error("Associado nao habilitado para votar: ".concat(associado.getCpf()));
 				throw new UnableToVoteException();
 			}
 			
 		} catch (Exception e) {
-			LOG.error("CPF não encontrado: ".concat(associado.getCpf()));
-			throw new CpfInvalidoException("CPF não encontrado");
+			LOG.error("CPF nao encontrado: ".concat(associado.getCpf()));
+			throw new CpfInvalidoException("CPF nao encontrado");
 		}
 	}
 
@@ -100,15 +100,15 @@ public class VotoService {
 	}
 
 	public void verificarTipoVoto(Voto voto) {
-		if(!voto.getIndVoto().equalsIgnoreCase("Sim") && !voto.getIndVoto().equalsIgnoreCase("Não")) {
-			LOG.error("Erro ao registrar voto. Tipo de voto inválido.");
-			throw new VotoException("Tipos válidos de voto: Sim/Não");
+		if(!voto.getIndVoto().equalsIgnoreCase("Sim") && !voto.getIndVoto().equalsIgnoreCase("nao")) {
+			LOG.error("Erro ao registrar voto. Tipo de voto invalido.");
+			throw new VotoException("Tipos validos de voto: Sim/nao");
 		}
 	}
 
 	/**
-	 * Validações da pauta: existência, duração e intervalo para votação
-	 * Valida se o associado já votou
+	 * Validaï¿½ï¿½es da pauta: existencia, duracao e intervalo para votacao
+	 * Valida se o associado ja votou
 	 *
 	 * @param idPauta
 	 * @param idItemPauta
@@ -118,17 +118,17 @@ public class VotoService {
 	private void verificarVotacaoPauta(String idPauta, String idItemPauta, String cpfAssociado) {
 		Pauta pauta = pautaService.findById(idPauta);
 		if(pauta == null) {
-			LOG.error("Pauta não encontrada: ".concat(idPauta));
-			throw new PautaNotFoundException("Pauta não encontrada");
+			LOG.error("Pauta nao encontrada: ".concat(idPauta));
+			throw new PautaNotFoundException("Pauta nao encontrada");
 		}
 					
 		if(pauta.getDuracaoSessao() == null) {
-			LOG.error("Duração da sessão não cadastrada: ".concat(idPauta));
-			throw new PautaFechadaException("Duração da sessão não cadastrada");						
+			LOG.error("duracao da sessï¿½o nao cadastrada: ".concat(idPauta));
+			throw new PautaFechadaException("duracao da sessao nao cadastrada");						
 		}
 		
-		if(LocalDateTime.now().isBefore(pauta.getInicioSessao())) throw new PautaFechadaException("Votação não iniciada");
-		if(LocalDateTime.now().isAfter(pauta.getFimSessao())) throw new PautaFechadaException("Votação encerrada");
+		if(LocalDateTime.now().isBefore(pauta.getInicioSessao())) throw new PautaFechadaException("votacao nao iniciada");
+		if(LocalDateTime.now().isAfter(pauta.getFimSessao())) throw new PautaFechadaException("votacao encerrada");
 		
 		ItemPauta itemPauta = pauta.getItens().stream().filter(i -> i.getId() == idItemPauta).findFirst().orElse(null);
 		
@@ -139,8 +139,8 @@ public class VotoService {
 		}).findFirst().orElse(null); 
 				
 		if(voto != null) {
-			LOG.error("Associado já votou: ".concat(cpfAssociado));
-			throw new VotoException("Associado já votou");
+			LOG.error("Associado ja votou: ".concat(cpfAssociado));
+			throw new VotoException("Associado ja votou");
 		}
 	}
 
@@ -152,7 +152,7 @@ public class VotoService {
 	 */		
 	public void delete(String id) {
 		findById(id);
-		LOG.info(">>> Exclusão do voto: ".concat(id));
+		LOG.info(">>> Exclusao do voto: ".concat(id));
 		votoRepository.deleteById(id);
 	}
 
@@ -165,7 +165,7 @@ public class VotoService {
 	public Voto update(Voto obj) {
 		Voto newObj = findById(obj.getId());
 		updateData(newObj, obj);
-		LOG.info(">>> Atualização do voto: ".concat(obj.getId()));
+		LOG.info(">>> Atualizacao do voto: ".concat(obj.getId()));
 		return votoRepository.save(newObj);
 	}
 

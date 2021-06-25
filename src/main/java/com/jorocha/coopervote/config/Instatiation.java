@@ -55,11 +55,11 @@ public class Instatiation implements CommandLineRunner{
 		Associado associado003 = new Associado(null, "Marta", "associado003@gmail.com", "00000000434");		
 		associadoRepository.saveAll(Arrays.asList(associado001, associado002, associado003));
 		
-		Pauta pauta1 = new Pauta(null, new Date(), "Reunião deliberativa ordinária", "Reforma do telhado", 5, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<ItemPauta>());
-		Pauta pauta2 = new Pauta(null, new Date(), "Reunião deliberativa extraordinária", "Festa junina", null, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<ItemPauta>());				
+		Pauta pauta1 = new Pauta(null, new Date(), "Reuniao deliberativa ordinaria", "Reforma do telhado", 5, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<ItemPauta>());
+		Pauta pauta2 = new Pauta(null, new Date(), "Reuniao deliberativa extraordinaria", "Festa junina", null, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<ItemPauta>());				
 		pautaRepository.saveAll(Arrays.asList(pauta1, pauta2));
 		
-		ItemPauta item = new ItemPauta(null, "Pandemia", "Distância de 2 metros para cada mesa", 3, new Long(3), new Long(0), "Aprovado",new ArrayList<Voto>());
+		ItemPauta item = new ItemPauta(null, "Pandemia", "Distancia de 2 metros para cada mesa", 3, new Long(3), new Long(0), "Aprovado",new ArrayList<Voto>());
 		itemPautaRepository.saveAll(Arrays.asList(item));
 		
 		Voto voto1Pauta2 = new Voto(null, "Sim", item.getId(), associado001.getId());

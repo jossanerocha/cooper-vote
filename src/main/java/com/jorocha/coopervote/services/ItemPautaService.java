@@ -42,7 +42,7 @@ public class ItemPautaService {
 	public ItemPauta findById(String id) {
 		LOG.info(">>> Busca item: ".concat(id));
 		Optional<ItemPauta> obj = itemPautaRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Item da pauta não encontrado"));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Item da pauta nao encontrado"));
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class ItemPautaService {
 	 */	
 	public void delete(String id) {
 		findById(id);
-		LOG.info(">>> Exclusão de item da pauta: ".concat(id));
+		LOG.info(">>> Exclusao de item da pauta: ".concat(id));
 		itemPautaRepository.deleteById(id);
 	}
 
@@ -76,7 +76,7 @@ public class ItemPautaService {
 	public ItemPauta update(ItemPauta obj) {
 		ItemPauta newObj = findById(obj.getId());
 		updateData(newObj, obj);
-		LOG.info(">>> Atualização do item da pauta: ".concat(obj.getId()));
+		LOG.info(">>> Atualizacao do item da pauta: ".concat(obj.getId()));
 		return itemPautaRepository.save(newObj);
 	}
 
@@ -103,7 +103,7 @@ public class ItemPautaService {
 	}	
 	
 	/**
-	 * Lista itens de pauta por termo contido no título
+	 * Lista itens de pauta por termo contido no titulo
 	 *
 	 * @param text
 	 * @return List<ItemPauta>
@@ -113,7 +113,7 @@ public class ItemPautaService {
 	}
 	
 	/**
-	 * Lista itens de pauta por termo contido no título ou descrição e entre um periodo de data
+	 * Lista itens de pauta por termo contido no titulo ou descriï¿½ï¿½o e entre um periodo de data
 	 *
 	 * @param text
 	 * @param minDate

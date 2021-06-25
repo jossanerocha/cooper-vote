@@ -91,7 +91,7 @@ public class AssociadoServiceTest {
 		Exception exception = assertThrows(CpfInvalidoException.class, () -> {
 			service.validarCpf(dto);
 	    });
-	    String msgEsperada = "CPF não encontrado";
+	    String msgEsperada = "CPF nao encontrado";
 	    String msgAtual = exception.getMessage();	    
 	    assertEquals(msgAtual, msgEsperada);
 	}
@@ -108,7 +108,7 @@ public class AssociadoServiceTest {
 		Exception exception = assertThrows(ObjectNotFoundException.class, () -> {
 			service.findById("dfdfdfdfdfdfdfdf");
 	    });
-	    String msgEsperada = "Associado não encontrado";
+	    String msgEsperada = "Associado nao encontrado";
 	    String msgAtual = exception.getMessage();	    
 	    assertEquals(msgAtual, msgEsperada);
 	}	

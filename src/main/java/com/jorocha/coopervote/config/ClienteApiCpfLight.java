@@ -31,11 +31,11 @@ public class ClienteApiCpfLight {
 	private static final String CONSULTA_CPF_URL = CONECTAGOV_URL + "/api-cpf-light/v2/consulta/cpf";
 
 	/*
-	 * Método para executar a consulta à API CPF Light. Formato: METHOD: POST
-	 * HEADERS: Content-Type: application/json x-cpf-usuario: CPF do usuário que
-	 * está executando a consulta. Authorization: "Bearer " + o token de acesso
-	 * gerado de acordo com o método getToken BODY: { "listaCpf": [ "cpf1", "cpf2",
-	 * "cpf3" (No Máximo 50 CPF's) ] }
+	 * Metodo para executar a consulta API CPF Light. Formato: METHOD: POST
+	 * HEADERS: Content-Type: application/json x-cpf-usuario: CPF do usuario que
+	 * esta executando a consulta. Authorization: "Bearer " + o token de acesso
+	 * gerado de acordo com o metodo getToken BODY: { "listaCpf": [ "cpf1", "cpf2",
+	 * "cpf3" (No Maximo 50 CPF's) ] }
 	 * 
 	 */
 	public static String consultaCpf(String cpf)
@@ -61,11 +61,11 @@ public class ClienteApiCpfLight {
 	}
 
 	/*
-	 * Método para geração do token de acesso para executar as consultas às API's do
+	 * Metodo para geracao do token de acesso para executar as consultas as API's do
 	 * Conectagov. Formato: METHOD: POST HEADERS: Content-Type:
 	 * application/x-www-form-urlencoded Authorization: client_id + ":" +
 	 * client_secret codificado em Base64 BODY:
-	 * "grant_type=client_credentials&scope=" + o escopo da aplicação para acesso à api
+	 * "grant_type=client_credentials&scope=" + o escopo da aplicacao para acesso a api
 	 * 
 	 */
 	private static OAuthJSONAccessTokenResponse getToken() throws OAuthSystemException, OAuthProblemException {

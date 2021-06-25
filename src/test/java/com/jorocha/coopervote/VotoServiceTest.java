@@ -79,9 +79,9 @@ public class VotoServiceTest {
 	@Order(4)
 	public void deveriaAtualizarUmVoto() {	
 		Voto result = deveriaRetornarUmVoto();
-		result.setIndVoto("Não");
+		result.setIndVoto("nao");
 		result = service.update(result);
-		assertThat(result.getIndVoto()).isEqualTo("Não");
+		assertThat(result.getIndVoto()).isEqualTo("nao");
 	}		
 	
 	@Test
@@ -92,7 +92,7 @@ public class VotoServiceTest {
 		Exception exception = assertThrows(VotoException.class, () -> {
 			service.verificarTipoVoto(result);
 	    });
-	    String msgEsperada = "Tipos válidos de voto: Sim/Não";
+	    String msgEsperada = "Tipos validos de voto: Sim/nao";
 	    String msgAtual = exception.getMessage();	    
 	    assertEquals(msgAtual, msgEsperada);
 	}
@@ -109,7 +109,7 @@ public class VotoServiceTest {
 		Exception exception = assertThrows(ObjectNotFoundException.class, () -> {
 			service.findById("dfdfdfdfdfdfdfdf");
 	    });
-	    String msgEsperada = "Voto não encontrado";
+	    String msgEsperada = "Voto nao encontrado";
 	    String msgAtual = exception.getMessage();	    
 	    assertEquals(msgAtual, msgEsperada);
 	}	

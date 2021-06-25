@@ -35,7 +35,7 @@ public class ItemPauta implements Serializable {
 		this.descricao = descricao;
 		this.totalVotos = votos.size();
 		this.totalVotosSim = votos.stream().filter(v -> v.getIndVoto().equalsIgnoreCase("Sim")).count();
-		this.totalVotosNao = votos.stream().filter(v -> v.getIndVoto().equalsIgnoreCase("Não")).count();
+		this.totalVotosNao = votos.stream().filter(v -> v.getIndVoto().equalsIgnoreCase("nao")).count();
 		this.resultado = this.totalVotosSim > this.totalVotosNao ? "Aprovado" : this.totalVotosNao > this.totalVotosSim ? "Reprovado" : "";		
 		this.getVotos().addAll(votos);
 	}

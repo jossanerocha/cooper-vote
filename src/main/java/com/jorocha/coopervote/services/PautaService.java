@@ -47,32 +47,32 @@ public class PautaService {
 	public Pauta findById(String id) {
 		LOG.info(">>> Busca da pauta: ".concat(id));
 		Optional<Pauta> obj = pautaRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Pauta não encontrada"));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Pauta nao encontrada"));
 	}
 	
 	/**
-	 * Abertura da sessão de votação de uma pauta
-	 * Duração mínima de uma sessão: 1 minuto
+	 * Abertura da sessï¿½o de votacao de uma pauta
+	 * duracao mï¿½nima de uma sessï¿½o: 1 minuto
 	 *
 	 * @param idPauta
 	 * @param numMinutos
 	 * @return Pauta
 	 */	
 	public Pauta abrirSessao(String id, Integer numMinutos) {
-		LOG.info(">>> Abertura de sessão da pauta: ".concat(id));
+		LOG.info(">>> Abertura de sessï¿½o da pauta: ".concat(id));
 		Pauta pauta = findById(id);
 		pauta.setDuracaoSessao(numMinutos);
 		return update(pauta);
 	}
 	
 	/**
-	 * Fechamento da sessão de votação de uma pauta
+	 * Fechamento da sessï¿½o de votacao de uma pauta
 	 *
 	 * @param idPauta
 	 * @return Pauta
 	 */	
 	public Pauta fecharSessao(String id) {
-		LOG.info(">>> Fechamento de sessão da pauta: ".concat(id));
+		LOG.info(">>> Fechamento de sessï¿½o da pauta: ".concat(id));
 		Pauta pauta = findById(id);
 		pauta.setFimSessao(LocalDateTime.now());
 		pauta = pautaRepository.save(pauta);
@@ -100,7 +100,7 @@ public class PautaService {
 	 */	
 	public void delete(String id) {
 		findById(id);
-		LOG.info(">>> Exclusão da pauta: ".concat(id));
+		LOG.info(">>> Exclusao da pauta: ".concat(id));
 		pautaRepository.deleteById(id);
 	}
 
@@ -113,7 +113,7 @@ public class PautaService {
 	public Pauta update(Pauta obj) {
 		Pauta newObj = findById(obj.getId());
 		updateData(newObj, obj);
-		LOG.info(">>> Atualização da pauta: ".concat(obj.getId()));
+		LOG.info(">>> Atualizacao da pauta: ".concat(obj.getId()));
 		return pautaRepository.save(newObj);
 	}
 
@@ -140,7 +140,7 @@ public class PautaService {
 	}	
 	
 	/**
-	 * Lista pautas por termo contido no título
+	 * Lista pautas por termo contido no titulo
 	 *
 	 * @param text
 	 * @return List<Pauta>
@@ -150,7 +150,7 @@ public class PautaService {
 	}
 	
 	/**
-	 * Lista pautas por termo contido no título ou descrição e entre um periodo de data
+	 * Lista pautas por termo contido no titulo ou descriï¿½ï¿½o e entre um periodo de data
 	 *
 	 * @param text
 	 * @param minDate

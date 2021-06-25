@@ -54,7 +54,7 @@ public class AssociadoService {
 	 */		
 	public Associado findById(String id) {
 		Optional<Associado> obj = associadoRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Associado não encontrado"));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Associado nao encontrado"));
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class AssociadoService {
 		Associado associadoCadastrado = associadoRepository.findByCpf(associado.getCpf());
 		if(associadoCadastrado != null) {
 			LOG.error("Erro ao cadastrar o CPF: ".concat(associadoDTO.getCpf()));
-			throw new AssociadoException("CPF já cadastrado");
+			throw new AssociadoException("CPF ja cadastrado");
 		}
 		
 		associado = associadoRepository.insert(associado);		
@@ -88,7 +88,7 @@ public class AssociadoService {
 	 */	
 	public void delete(String id) {
 		findById(id);
-		LOG.info(">>> Exclusão do associado: ".concat(id));
+		LOG.info(">>> Exclusao do associado: ".concat(id));
 		associadoRepository.deleteById(id);
 	}
 
@@ -106,7 +106,7 @@ public class AssociadoService {
 		validarCpf(associadoDTO);
 		
 		updateData(newObj, associado);
-		LOG.info(">>> Atualização do associado: ".concat(associado.getId()));
+		LOG.info(">>> Atualizacao do associado: ".concat(associado.getId()));
 		return associadoRepository.save(newObj);
 	}
 
@@ -133,7 +133,7 @@ public class AssociadoService {
 	}
 
 	/**
-	 * Valida o número de CPF do associado
+	 * Valida o nï¿½mero de CPF do associado
 	 *
 	 * @param AssociadoDTO
 	 * @return UsuarioCpfDTO
@@ -145,8 +145,8 @@ public class AssociadoService {
 		UsuarioCpfDTO usuarioCpfDTO = lstUsuarioCPF.stream().findFirst().orElse(null);
 		
 		if(usuarioCpfDTO == null || StringUtils.isEmpty(usuarioCpfDTO.getNome())) {
-			LOG.error("CPF não encontrado: ".concat(associadoDTO.getCpf()));
-			throw new CpfInvalidoException("CPF não encontrado");
+			LOG.error("CPF nao encontrado: ".concat(associadoDTO.getCpf()));
+			throw new CpfInvalidoException("CPF nao encontrado");
 		}
 		
 		return usuarioCpfDTO;

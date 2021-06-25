@@ -34,8 +34,8 @@ public class ItemPautaResource {
 	@ApiOperation(value = "Lista de itens das Pautas")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Retorna a lista de itens das pautas"),
-		    @ApiResponse(code = 403, message = "Sem permissão para acessar a lista de itens das pautas"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissï¿½o para acessar a lista de itens das pautas"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceï¿½ï¿½o"),
 	})	
 	@RequestMapping(method=RequestMethod.GET)
  	public ResponseEntity<List<ItemPautaDTO>> findAll() {
@@ -47,8 +47,8 @@ public class ItemPautaResource {
 	@ApiOperation(value = "Retorna o ItemPauta a partir de um idItemPauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "ItemPauta encontrada"),
-		    @ApiResponse(code = 403, message = "Sem permissão para acessar a ItemPauta"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissï¿½o para acessar a ItemPauta"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceï¿½ï¿½o"),
 	})
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
  	public ResponseEntity<ItemPauta> findById(@PathVariable String id) {
@@ -59,8 +59,8 @@ public class ItemPautaResource {
 	@ApiOperation(value = "Insere um ItemPauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "ItemPauta inserido"),
-		    @ApiResponse(code = 403, message = "Sem permissão para inserir o ItemPauta"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissï¿½o para inserir o ItemPauta"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceï¿½ï¿½o"),
 	})	
 	@RequestMapping(method=RequestMethod.POST)
  	public ResponseEntity<Void> insert(@RequestBody ItemPautaDTO ItemPautaDTO) {
@@ -73,8 +73,8 @@ public class ItemPautaResource {
 	@ApiOperation(value = "Deleta um ItemPauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "ItemPauta deletado"),
-		    @ApiResponse(code = 403, message = "Sem permissão para deletar o ItemPauta"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissï¿½o para deletar o ItemPauta"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceï¿½ï¿½o"),
 	})	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
  	public ResponseEntity<Void> delete(@PathVariable String id) {
@@ -85,8 +85,8 @@ public class ItemPautaResource {
 	@ApiOperation(value = "Atualiza os dados de um ItemPauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "ItemPauta atualizado"),
-		    @ApiResponse(code = 403, message = "Sem permissão para atualizar o ItemPauta"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissï¿½o para atualizar o ItemPauta"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceï¿½ï¿½o"),
 	})
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
  	public ResponseEntity<Void> update(@RequestBody ItemPautaDTO ItemPautaDTO, @PathVariable String idItemPauta) {
@@ -96,11 +96,11 @@ public class ItemPautaResource {
 		return ResponseEntity.noContent().build();
 	}	
 	
-	@ApiOperation(value = "Lista ItemPauta por termo contido no título")
+	@ApiOperation(value = "Lista ItemPauta por termo contido no titulo")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "ItemPauta encontrado"),
-		    @ApiResponse(code = 403, message = "Sem permissão efetuar a busca"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissï¿½o efetuar a busca"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceï¿½ï¿½o"),
 	})
 	@RequestMapping(value="/findByTitle", method=RequestMethod.GET)
  	public ResponseEntity<List<ItemPauta>> findByTitle(@RequestParam(value="titulo", defaultValue="") String text) {
@@ -109,11 +109,11 @@ public class ItemPautaResource {
 		return ResponseEntity.ok().body(list);
 	}
 
-	@ApiOperation(value = "Lista ItemPauta por termo contido no título ou descrição e entre um periodo de datas")
+	@ApiOperation(value = "Lista ItemPauta por termo contido no titulo ou descriï¿½ï¿½o e entre um periodo de datas")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "ItemPauta encontrado"),
-		    @ApiResponse(code = 403, message = "Sem permissão efetuar a busca"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissï¿½o efetuar a busca"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceï¿½ï¿½o"),
 	})
 	@RequestMapping(value = "/findByTextoAndData", method = RequestMethod.GET)
 	public ResponseEntity<List<ItemPauta>> findByTextoAndData(@RequestParam(value = "termoBusca", defaultValue = "") String text) throws ParseException {

@@ -22,28 +22,28 @@ public class ExceptionHandlerResource {
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<Error> objectNotFound(ObjectNotFoundException objNotFound, HttpServletRequest request) {		
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		Error err = new Error(System.currentTimeMillis(), status.value(), "Não encontrado", objNotFound.getMessage(), request.getRequestURI());
+		Error err = new Error(System.currentTimeMillis(), status.value(), "nao encontrado", objNotFound.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 	
 	@ExceptionHandler(CpfInvalidoException.class)
 	public ResponseEntity<Error> cpfInvalidoException(CpfInvalidoException cpfInvalido, HttpServletRequest request) {		
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		Error err = new Error(System.currentTimeMillis(), status.value(), "Não encontrado", cpfInvalido.getMessage(), request.getRequestURI());
+		Error err = new Error(System.currentTimeMillis(), status.value(), "nao encontrado", cpfInvalido.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 	
 	@ExceptionHandler(UnableToVoteException.class)
 	public ResponseEntity<Error> cpfInvalidoException(UnableToVoteException unableToVote, HttpServletRequest request) {		
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		Error err = new Error(System.currentTimeMillis(), status.value(), "CPF sem permissão", unableToVote.getMessage(),request.getRequestURI());
+		Error err = new Error(System.currentTimeMillis(), status.value(), "CPF sem permissï¿½o", unableToVote.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 	
 	@ExceptionHandler(PautaNotFoundException.class)
 	public ResponseEntity<Error> pautaNotFound(PautaNotFoundException objNotFound, HttpServletRequest request) {		
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		Error err = new Error(System.currentTimeMillis(), status.value(), "Não encontrado", objNotFound.getMessage(), request.getRequestURI());
+		Error err = new Error(System.currentTimeMillis(), status.value(), "nao encontrado", objNotFound.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 	
@@ -57,14 +57,14 @@ public class ExceptionHandlerResource {
 	@ExceptionHandler(VotoException.class)
 	public ResponseEntity<Error> pautaFechada(VotoException votoInvalido, HttpServletRequest request) {		
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		Error err = new Error(System.currentTimeMillis(), status.value(), "Voto inválido", votoInvalido.getMessage(), request.getRequestURI());
+		Error err = new Error(System.currentTimeMillis(), status.value(), "Voto invalido", votoInvalido.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}	
 	
 	@ExceptionHandler(AssociadoException.class)
 	public ResponseEntity<Error> associadoNaoCasdastrado(AssociadoException associado, HttpServletRequest request) {		
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		Error err = new Error(System.currentTimeMillis(), status.value(), "Associado não cadastrado", associado.getMessage(), request.getRequestURI());
+		Error err = new Error(System.currentTimeMillis(), status.value(), "Associado nao cadastrado", associado.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}	
 	

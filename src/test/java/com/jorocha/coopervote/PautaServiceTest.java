@@ -39,8 +39,8 @@ public class PautaServiceTest {
 	@Test
 	@Order(1)
 	public void deveriaInserirUmaListaDeAssociados() {	
-		Pauta pauta1 = new Pauta(null, new Date(), "Reunião 001", "Descrição 001", 5, LocalDateTime.of(2021, Month.JUNE, 21, 14, 33), LocalDateTime.of(2021, Month.JUNE, 21, 14, 45), new ArrayList<ItemPauta>());
-		Pauta pauta2 = new Pauta(null, new Date(), "Reunião 002", "Descrição 002", null, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<ItemPauta>());
+		Pauta pauta1 = new Pauta(null, new Date(), "Reuniï¿½o 001", "Descriï¿½ï¿½o 001", 5, LocalDateTime.of(2021, Month.JUNE, 21, 14, 33), LocalDateTime.of(2021, Month.JUNE, 21, 14, 45), new ArrayList<ItemPauta>());
+		Pauta pauta2 = new Pauta(null, new Date(), "Reuniï¿½o 002", "Descriï¿½ï¿½o 002", null, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<ItemPauta>());
 		
 		Arrays.asList(pauta1, pauta2).stream().forEach(p -> {
 			service.insert(p);	
@@ -54,7 +54,7 @@ public class PautaServiceTest {
 	@Test
 	@Order(2)
 	public void deveriaRetornarUmaPautaPorTermoContidoNoTitulo() {	
-		List<Pauta> result = service.findByTitulo("Reunião");
+		List<Pauta> result = service.findByTitulo("Reuniï¿½o");
 		assertThat(result.size()).isEqualTo(2);
 	}
 	
@@ -76,7 +76,7 @@ public class PautaServiceTest {
 		List<Pauta> result = service.findByTitulo("002");	     
 		Pauta pauta = result.get(0);
 	    assertThat(pauta).isNotNull();
-	    assertThat(pauta.getTitulo()).isEqualTo("Reunião 002");
+	    assertThat(pauta.getTitulo()).isEqualTo("Reuniï¿½o 002");
 	}	
 	
 	@Test
@@ -106,9 +106,9 @@ public class PautaServiceTest {
 	@Order(8)
 	public void deveriaAtualizarUmaPauta() {	
 		Pauta pauta = deveriaRetornarUmaPauta();
-		pauta.setTitulo("Título alterado");
+		pauta.setTitulo("titulo alterado");
 		pauta = service.update(pauta);
-		assertThat(pauta.getTitulo()).isEqualTo("Título alterado");
+		assertThat(pauta.getTitulo()).isEqualTo("titulo alterado");
 	}	
 	
 	@Test
@@ -123,7 +123,7 @@ public class PautaServiceTest {
 		Exception exception = assertThrows(ObjectNotFoundException.class, () -> {
 			service.findById("dfdfdfdfdfdfdfdf");
 	    });
-	    String msgEsperada = "Pauta não encontrada";
+	    String msgEsperada = "Pauta nao encontrada";
 	    String msgAtual = exception.getMessage();	    
 	    assertEquals(msgAtual, msgEsperada);
 	}	
