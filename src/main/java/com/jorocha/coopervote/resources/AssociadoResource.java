@@ -35,8 +35,8 @@ public class AssociadoResource {
 	@ApiOperation(value = "Retorna uma lista de associados")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Retorna a lista de associados"),
-		    @ApiResponse(code = 403, message = "Sem permissão para acessar a lista de associados"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissao para acessar a lista de associados"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(method=RequestMethod.GET)
  	public ResponseEntity<List<AssociadoDTO>> findAll() {
@@ -48,8 +48,8 @@ public class AssociadoResource {
 	@ApiOperation(value = "Retorna um associado a partir de um idAssociado")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Pauta encontrada"),
-		    @ApiResponse(code = 403, message = "Sem permissão para acessar a pauta"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissao para acessar a pauta"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@GetMapping(value = "/{id}")
  	public ResponseEntity<AssociadoDTO> findById(@PathVariable String id) {
@@ -60,8 +60,8 @@ public class AssociadoResource {
 	@ApiOperation(value = "Insere um associado")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Associado inserido"),
-		    @ApiResponse(code = 403, message = "Sem permissão para inserir um associado"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissao para inserir um associado"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})		
 	@RequestMapping(method=RequestMethod.POST)
  	public ResponseEntity<Void> insert(@RequestBody AssociadoDTO associadoDTO) throws OAuthSystemException, OAuthProblemException, IOException {
@@ -74,8 +74,8 @@ public class AssociadoResource {
 	@ApiOperation(value = "Deleta um associado")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Associado deletado"),
-		    @ApiResponse(code = 403, message = "Sem permissão para deletar um associado"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissao para deletar um associado"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
  	public ResponseEntity<Void> delete(@PathVariable String id) {
@@ -86,8 +86,8 @@ public class AssociadoResource {
 	@ApiOperation(value = "Atualiza os dados de um associado")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Associado atualizado"),
-		    @ApiResponse(code = 403, message = "Sem permissão para atualizar um associado"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissao para atualizar um associado"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
  	public ResponseEntity<Void> update(@RequestBody AssociadoDTO associadoDTO, @PathVariable String idAssociado) throws OAuthSystemException, OAuthProblemException, IOException {

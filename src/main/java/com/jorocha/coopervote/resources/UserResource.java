@@ -28,11 +28,11 @@ public class UserResource {
 	@Autowired
 	private UserService service;
 
-	@ApiOperation(value = "Retorna uma lista de usuários")
+	@ApiOperation(value = "Retorna uma lista de usuarios")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Retorna a lista de usuários"),
-		    @ApiResponse(code = 403, message = "Sem permissão para acessar a lista de usuários"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+			@ApiResponse(code = 200, message = "Retorna a lista de usuarios"),
+		    @ApiResponse(code = 403, message = "Sem permissao para acessar a lista de usuarios"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(method=RequestMethod.GET)
  	public ResponseEntity<List<UserDTO>> findAll() {
@@ -41,11 +41,11 @@ public class UserResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@ApiOperation(value = "Retorna uma usuário")
+	@ApiOperation(value = "Retorna uma usuario")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Retorna uma usuário"),
-		    @ApiResponse(code = 403, message = "Sem permissão para acessar a lista de usuários"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+			@ApiResponse(code = 200, message = "Retorna uma usuario"),
+		    @ApiResponse(code = 403, message = "Sem permissao para acessar a lista de usuarios"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(value="/logar", method=RequestMethod.GET)
  	public ResponseEntity<UserDTO> logar(

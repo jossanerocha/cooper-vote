@@ -39,8 +39,8 @@ public class PautaResource {
 	@ApiOperation(value = "Lista de pautas")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Retorna a lista de pautas"),
-		    @ApiResponse(code = 403, message = "Sem permiss�o para acessar a lista de pautas"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exce��o"),
+		    @ApiResponse(code = 403, message = "Sem permissao para acessar a lista de pautas"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(method=RequestMethod.GET)
  	public ResponseEntity<List<PautaDTO>> findAll() {
@@ -52,8 +52,8 @@ public class PautaResource {
 	@ApiOperation(value = "Retorna a pauta a partir de um idPauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Pauta encontrada"),
-		    @ApiResponse(code = 403, message = "Sem permiss�o para acessar a pauta"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exce��o"),
+		    @ApiResponse(code = 403, message = "Sem permissao para acessar a pauta"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
  	public ResponseEntity<Pauta> findById(@PathVariable String id) {
@@ -64,8 +64,8 @@ public class PautaResource {
 	@ApiOperation(value = "Abre a sess�o de uma pauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Sess�o aberta"),
-		    @ApiResponse(code = 403, message = "Sem permiss�o para abrir a sess�o"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exce��o"),
+		    @ApiResponse(code = 403, message = "Sem permissao para abrir a sess�o"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(value="/abrirSessao", method=RequestMethod.GET)
  	public ResponseEntity<Pauta> abrirSessao(
@@ -78,8 +78,8 @@ public class PautaResource {
 	@ApiOperation(value = "Fecha a sess�o de uma pauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Sess�o aberta"),
-		    @ApiResponse(code = 403, message = "Sem permiss�o para abrir a sess�o"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exce��o"),
+		    @ApiResponse(code = 403, message = "Sem permissao para abrir a sess�o"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(value="/fecharSessao", method=RequestMethod.GET)
  	public ResponseEntity<Pauta> fecharSessao(@Valid @NonNull@RequestParam(value = "idPauta" ) String id){
@@ -90,8 +90,8 @@ public class PautaResource {
 	@ApiOperation(value = "Insere uma pauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Pauta inserida"),
-		    @ApiResponse(code = 403, message = "Sem permiss�o para inserir a pauta"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exce��o"),
+		    @ApiResponse(code = 403, message = "Sem permissao para inserir a pauta"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(method=RequestMethod.POST)
  	public ResponseEntity<Void> insert(@RequestBody PautaDTO pautaDTO) {
@@ -104,8 +104,8 @@ public class PautaResource {
 	@ApiOperation(value = "Deleta uma pauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Pauta deletada"),
-		    @ApiResponse(code = 403, message = "Sem permiss�o para deletar a pauta"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exce��o"),
+		    @ApiResponse(code = 403, message = "Sem permissao para deletar a pauta"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
  	public ResponseEntity<Void> delete(@PathVariable String id) {
@@ -116,8 +116,8 @@ public class PautaResource {
 	@ApiOperation(value = "Atualiza os dados de uma pauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Pauta atualizada"),
-		    @ApiResponse(code = 403, message = "Sem permiss�o para atualizar a pauta"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exce��o"),
+		    @ApiResponse(code = 403, message = "Sem permissao para atualizar a pauta"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
  	public ResponseEntity<Void> update(@RequestBody PautaDTO pautaDTO, @PathVariable String idPauta) {
@@ -130,8 +130,8 @@ public class PautaResource {
 	@ApiOperation(value = "Lista pautas por termo contido no titulo")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Pauta encontrada"),
-		    @ApiResponse(code = 403, message = "Sem permiss�o efetuar a busca"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exce��o"),
+		    @ApiResponse(code = 403, message = "Sem permissao efetuar a busca"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})
 	@RequestMapping(value="/findByTitle", method=RequestMethod.GET)
  	public ResponseEntity<List<Pauta>> findByTitle(@RequestParam(value="titulo", defaultValue="") String text) {
@@ -143,8 +143,8 @@ public class PautaResource {
 	@ApiOperation(value = "Lista pautas por termo contido no titulo ou descri��o e entre um periodo de datas")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Pauta encontrada"),
-		    @ApiResponse(code = 403, message = "Sem permiss�o efetuar a busca"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exce��o"),
+		    @ApiResponse(code = 403, message = "Sem permissao efetuar a busca"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})
 	@RequestMapping(value = "/findByTextoAndData", method = RequestMethod.GET)
 	public ResponseEntity<List<Pauta>> findByTextoAndData(

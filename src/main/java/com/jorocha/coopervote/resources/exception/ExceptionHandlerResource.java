@@ -36,7 +36,7 @@ public class ExceptionHandlerResource {
 	@ExceptionHandler(UnableToVoteException.class)
 	public ResponseEntity<Error> cpfInvalidoException(UnableToVoteException unableToVote, HttpServletRequest request) {		
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		Error err = new Error(System.currentTimeMillis(), status.value(), "CPF sem permiss�o", unableToVote.getMessage(),request.getRequestURI());
+		Error err = new Error(System.currentTimeMillis(), status.value(), "CPF sem permissao", unableToVote.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 	

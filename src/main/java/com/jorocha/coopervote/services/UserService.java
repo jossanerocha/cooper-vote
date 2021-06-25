@@ -23,7 +23,7 @@ public class UserService implements UserDetailsService {
 	}
 	
 	/**
-	 * Retorna uma lista de usu�rios
+	 * Retorna uma lista de usuarios
 	 *
 	 * @param 
 	 * @return List<User>
@@ -33,14 +33,14 @@ public class UserService implements UserDetailsService {
 	}
 	
 	/**
-	 * Retorna um usu�rio logado
+	 * Retorna um usuario logado
 	 *
 	 * @param username
 	 */
 	public UserDTO logar(String username, String password) {
 		User user = userRepository.findByUsernameAndPassword(username, password);
 		if (user == null) {
-			throw new LoginException("Usu�rio nao encontrado");
+			throw new LoginException("usuario nao encontrado");
 		}		
 		return new UserDTO(user);
 	}

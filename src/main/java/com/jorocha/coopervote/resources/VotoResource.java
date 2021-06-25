@@ -35,8 +35,8 @@ public class VotoResource {
 	@ApiOperation(value = "Lista os votos de todas as pautas")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Retorna uma lista de votos"),
-		    @ApiResponse(code = 403, message = "Sem permissão para acessar a lista de votos"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissao para acessar a lista de votos"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(method=RequestMethod.GET)
  	public ResponseEntity<List<VotoDTO>> findAll() {
@@ -48,8 +48,8 @@ public class VotoResource {
 	@ApiOperation(value = "Retorna o voto a partir de um idVoto")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Voto encontrado"),
-		    @ApiResponse(code = 403, message = "Sem permissão para acessar o voto"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissao para acessar o voto"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
  	public ResponseEntity<Voto> findById(@PathVariable String id) {
@@ -60,8 +60,8 @@ public class VotoResource {
 	@ApiOperation(value = "Insere o voto em um item da pauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Voto inserido"),
-		    @ApiResponse(code = 403, message = "Sem permissão para inserir o voto"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissao para inserir o voto"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})		
 	@RequestMapping(method=RequestMethod.POST)
  	public ResponseEntity<Void> insert(
@@ -77,8 +77,8 @@ public class VotoResource {
 	@ApiOperation(value = "Deleta o voto de uma pauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Voto deletado"),
-		    @ApiResponse(code = 403, message = "Sem permissão para deletar o voto"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissao para deletar o voto"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
  	public ResponseEntity<Void> delete(@PathVariable String id) {
@@ -89,8 +89,8 @@ public class VotoResource {
 	@ApiOperation(value = "Atualiza o voto de uma pauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Voto atualizado"),
-		    @ApiResponse(code = 403, message = "Sem permissão para atualizar o voto"),
-		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		    @ApiResponse(code = 403, message = "Sem permissao para atualizar o voto"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma excecao"),
 	})
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
  	public ResponseEntity<Void> update(@RequestBody VotoDTO votoDTO, @PathVariable String idVoto) {
