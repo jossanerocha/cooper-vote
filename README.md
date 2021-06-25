@@ -8,9 +8,14 @@
 
 <p align="left">CooperVote é uma solução back-end REST, desenvolvida para o desafio técnico da Cooperativa de crédito - SICRED.</p>
 
-<p align="left">Consiste em uma aplicação para administração de assembléias, onde cada associado possui um voto por sessão de votação.</p>
+<p align="left">Consiste em uma aplicação para administração de assembléias, onde cada associado possui um voto por item pautado.</p>
 
-<p align="left"></p>
+<p align="left">Optei por Graddle e MongoDB mesmo não sendo o que uso habitualmente, porque preferi encarar como desafio. 
+</p>
+
+<p align="left">Optei por Graddle e MongoDB mesmo não sendo o que uso habitualmente, porque preferi encarar como desafio.</p>
+
+<p align="left">No geral, busquei seguir as orientações dos documentos que recebi.</p>
 
 <p align="left">Porta: 9000</p>
 
