@@ -1,7 +1,7 @@
 # <h1 align="left">COOPERVOTE</h1>
 
 <p align="left">
-	 <a href="https://www.heroku.com/">Heroku</a>
+	 <a href="http://cooper-vote-app.herokuapp.com/">Heroku</a>
 	 <a href="https://github.com/jossanerocha/cooper-vote">Github</a>
 	 <a href="https://www.linkedin.com/in/jossane-rocha/">Autora</a>
 </p>
