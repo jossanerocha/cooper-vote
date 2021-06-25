@@ -74,12 +74,12 @@ public class KafKaProducerService {
 		future.addCallback(new ListenableFutureCallback<SendResult<String, Pauta>>() {
 			@Override
 			public void onSuccess(SendResult<String, Pauta> result) {
-				LOG.info("Sessão fechada: " + pauta + " offset: " + result.getRecordMetadata().offset());
+				LOG.info("Sessao fechada: " + pauta + " offset: " + result.getRecordMetadata().offset());
 			}
 
 			@Override
 			public void onFailure(Throwable ex) {
-				LOG.error("Falha ao fechar sessão : " + pauta, ex);
+				LOG.error("Falha ao fechar sessao : " + pauta, ex);
 			}
 		});
 	}	

@@ -23,6 +23,6 @@ public class KafKaConsumerService {
 	
 	@KafkaListener(topics = "${sessao.topic.name}", groupId = "${sessao.topic.group.id}", containerFactory = "sessaoKafkaListenerContainerFactory")
 	public void consume(Pauta pauta) {
-		LOG.info(String.format("Sessão fechada -> %s - %s", pauta.getTitulo(), pauta.getDescricao()));
+		LOG.info(String.format("Sessao fechada -> %s - %s", pauta.getTitulo(), pauta.getDescricao()));
 	}	
 }

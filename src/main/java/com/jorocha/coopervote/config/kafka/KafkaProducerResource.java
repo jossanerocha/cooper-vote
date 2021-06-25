@@ -24,13 +24,13 @@ public class KafkaProducerResource {
 		this.producerService = producerService;
 	}
 
-	@ApiOperation(value = "Publicação da mensagem")
+	@ApiOperation(value = "Publicao da mensagem")
 	@PostMapping(value = "/publicar")
 	public void enviarParaTopic(@RequestParam("mensagem") String message) {
 		this.producerService.sendMessage(message);
 	}
 
-	@ApiOperation(value = "Criação da mensagem de criação de associado")
+	@ApiOperation(value = "Criacao da mensagem de criacao de associado")
 	@PostMapping(value = "/criarAssociado")
 	public void enviarParaTopic(
 			@RequestParam("id") String id, 
@@ -44,7 +44,7 @@ public class KafkaProducerResource {
 		this.producerService.saveAssociado(associado);
 	}
 	
-	@ApiOperation(value = "Criação da mensagem de fechamento de sessão")
+	@ApiOperation(value = "Criacao da mensagem de fechamento de sessao")
 	@PostMapping(value = "/fecharSessao")
 	public void enviarParaTopic(@RequestBody Pauta pauta){
 		this.producerService.fecharSessao(pauta);
