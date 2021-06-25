@@ -15,8 +15,6 @@
 
 <p align="left">No geral, busquei seguir as orientações dos documentos que recebi.</p>
 
-<p align="left">Porta: 9000</p>
-
 
 <p align="left">Lista de CPF's (máximo 50) para utilização na <a href="https://www.gov.br/conecta/catalogo/apis/cadastro-base-do-cidadao-cbc-cpf/swagger_view">API CPF Light<a/></p>
 
