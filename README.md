@@ -16,6 +16,12 @@
 <p align="left">No geral, busquei seguir as orientações dos documentos que recebi.</p>
 
 
+<p align="left">Sobre versionamento, eu costumo utilizar branches master, hom, tes e dev. Além disso, utilizaria o processo estabelecido pelo Git Flow.</p>
+
+<p align="left">Não realizei teste de performance, pois nas equipes onde atuei havia profissionais dedicados apenas aos testes. No entando, estou disponível para desenvolver essa habilidade. </p>
+
+<p align="left">Até mais!</p>
+
 <p align="left">Lista de CPF's (máximo 50) para utilização na <a href="https://www.gov.br/conecta/catalogo/apis/cadastro-base-do-cidadao-cbc-cpf/swagger_view">API CPF Light<a/></p>
 
 <ul>
@@ -33,5 +39,4 @@
 	<li>82272387187</li>
 	<li>82271577187</li>
 <ul/>
-
 
