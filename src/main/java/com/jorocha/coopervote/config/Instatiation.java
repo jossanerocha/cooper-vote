@@ -7,7 +7,6 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
 
 import com.jorocha.coopervote.domain.Associado;
 import com.jorocha.coopervote.domain.ItemPauta;
@@ -20,7 +19,7 @@ import com.jorocha.coopervote.repository.PautaRepository;
 import com.jorocha.coopervote.repository.UserRepository;
 import com.jorocha.coopervote.repository.VotoRepository;
 
-@Configuration
+//@Configuration
 public class Instatiation implements CommandLineRunner{
 	
 	@Autowired
@@ -35,7 +34,6 @@ public class Instatiation implements CommandLineRunner{
 	@Autowired
 	private VotoRepository votoRepository;
 	
-	@Autowired
 	private UserRepository userRepository;
 	
 	@Override
