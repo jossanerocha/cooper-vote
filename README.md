@@ -13,8 +13,6 @@
 <p align="left">Optei por Graddle e MongoDB mesmo não sendo o que uso habitualmente, porque preferi encarar como desafio. 
 </p>
 
-<p align="left">Optei por Graddle e MongoDB mesmo não sendo o que uso habitualmente, porque preferi encarar como desafio.</p>
-
 <p align="left">No geral, busquei seguir as orientações dos documentos que recebi.</p>
 
 <p align="left">Porta: 9000</p>
