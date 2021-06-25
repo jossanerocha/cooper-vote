@@ -19,7 +19,7 @@ import com.jorocha.coopervote.repository.PautaRepository;
 import com.jorocha.coopervote.repository.UserRepository;
 import com.jorocha.coopervote.repository.VotoRepository;
 
-//@Configuration
+@Configuration
 public class Instatiation implements CommandLineRunner{
 	
 	@Autowired
