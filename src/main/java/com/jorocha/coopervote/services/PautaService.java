@@ -136,7 +136,7 @@ public class PautaService {
 	 * @return Pauta
 	 */	
 	public Pauta fromDTO(PautaDTO pautaDTO) {
-		return new Pauta(pautaDTO.getId(), pautaDTO.getData(), pautaDTO.getTitulo(), pautaDTO.getDescricao(), pautaDTO.getDuracaoSessao(), pautaDTO.getInicioSessao(), pautaDTO.getFimSessao(), pautaDTO.getVotos());
+		return new Pauta(pautaDTO.getId(), pautaDTO.getData(), pautaDTO.getTitulo(), pautaDTO.getDescricao(), pautaDTO.getDuracaoSessao(), pautaDTO.getInicioSessao(), pautaDTO.getFimSessao(), pautaDTO.getItens());
 	}	
 	
 	/**

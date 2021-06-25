@@ -10,10 +10,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.jorocha.coopervote.domain.Associado;
+import com.jorocha.coopervote.domain.ItemPauta;
 import com.jorocha.coopervote.domain.Pauta;
 import com.jorocha.coopervote.domain.User;
 import com.jorocha.coopervote.domain.Voto;
 import com.jorocha.coopervote.repository.AssociadoRepository;
+import com.jorocha.coopervote.repository.ItemPautaRepository;
 import com.jorocha.coopervote.repository.PautaRepository;
 import com.jorocha.coopervote.repository.UserRepository;
 import com.jorocha.coopervote.repository.VotoRepository;
@@ -28,6 +30,9 @@ public class Instatiation implements CommandLineRunner{
 	private PautaRepository pautaRepository;
 	
 	@Autowired
+	private ItemPautaRepository itemPautaRepository;	
+	
+	@Autowired
 	private VotoRepository votoRepository;
 	
 	@Autowired
@@ -39,6 +44,7 @@ public class Instatiation implements CommandLineRunner{
 		userRepository.deleteAll();
 		associadoRepository.deleteAll();
 		votoRepository.deleteAll();
+		itemPautaRepository.deleteAll();
 		pautaRepository.deleteAll();
 		
 		User user = new User();
@@ -50,25 +56,24 @@ public class Instatiation implements CommandLineRunner{
 		Associado associado002 = new Associado(null, "Jonas", "associado002@gmail.com", "00000000353");
 		Associado associado003 = new Associado(null, "Marta", "associado003@gmail.com", "00000000434");		
 		associadoRepository.saveAll(Arrays.asList(associado001, associado002, associado003));
-
-		Pauta pauta1 = new Pauta(null, new Date(), "Reunião deliberativa ordinária", "Reforma do telhado", 5, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<Voto>());
-		Pauta pauta2 = new Pauta(null, new Date(), "Reunião deliberativa extraordinária", "Festa junina", null, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<Voto>());
-		pautaRepository.saveAll(Arrays.asList(pauta1, pauta2));
-				
-		Voto voto1Pauta1 = new Voto(null, "Sim", associado001);
-		Voto voto2Pauta1 = new Voto(null, "Não", associado002);
-		Voto voto3Pauta1 = new Voto(null, "Não", associado003);
-		votoRepository.saveAll(Arrays.asList(voto1Pauta1, voto2Pauta1, voto3Pauta1));
 		
-		Voto voto1Pauta2 = new Voto(null, "Sim", associado001);
-		Voto voto2Pauta2 = new Voto(null, "Sim", associado002);
-		Voto voto3Pauta2 = new Voto(null, "Sim", associado003);
+		Pauta pauta1 = new Pauta(null, new Date(), "Reunião deliberativa ordinária", "Reforma do telhado", 5, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<ItemPauta>());
+		Pauta pauta2 = new Pauta(null, new Date(), "Reunião deliberativa extraordinária", "Festa junina", null, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<ItemPauta>());				
+		pautaRepository.saveAll(Arrays.asList(pauta1, pauta2));
+		
+		ItemPauta item = new ItemPauta(null, "Pandemia", "Distância de 2 metros para cada mesa", 3, new Long(3), new Long(0), "Aprovado",new ArrayList<Voto>());
+		itemPautaRepository.saveAll(Arrays.asList(item));
+		
+		Voto voto1Pauta2 = new Voto(null, "Sim", item.getId(), associado001.getId());
+		Voto voto2Pauta2 = new Voto(null, "Sim", item.getId(), associado002.getId());
+		Voto voto3Pauta2 = new Voto(null, "Sim", item.getId(), associado003.getId());
 		votoRepository.saveAll(Arrays.asList(voto1Pauta2, voto2Pauta2, voto3Pauta2));
 		
-		pauta1.getVotos().addAll(Arrays.asList(voto1Pauta1, voto2Pauta1, voto3Pauta1));
-		pauta2.getVotos().addAll(Arrays.asList(voto1Pauta2, voto2Pauta2, voto3Pauta2));
-		pautaRepository.saveAll(Arrays.asList(pauta1, pauta2));		
-
+		pauta2.getItens().add(item);
+		pautaRepository.save(pauta2);
+		
+		item.getVotos().addAll(Arrays.asList(voto1Pauta2, voto2Pauta2, voto3Pauta2));
+		itemPautaRepository.save(item);
 	}
 
 }

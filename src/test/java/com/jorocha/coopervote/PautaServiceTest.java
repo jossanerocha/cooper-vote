@@ -19,8 +19,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.jorocha.coopervote.domain.ItemPauta;
 import com.jorocha.coopervote.domain.Pauta;
-import com.jorocha.coopervote.domain.Voto;
 import com.jorocha.coopervote.repository.PautaRepository;
 import com.jorocha.coopervote.services.PautaService;
 import com.jorocha.coopervote.services.exception.ObjectNotFoundException;
@@ -39,8 +39,8 @@ public class PautaServiceTest {
 	@Test
 	@Order(1)
 	public void deveriaInserirUmaListaDeAssociados() {	
-		Pauta pauta1 = new Pauta(null, new Date(), "Reunião 001", "Descrição 001", 5, LocalDateTime.of(2021, Month.JUNE, 21, 14, 33), LocalDateTime.of(2021, Month.JUNE, 21, 14, 45), new ArrayList<Voto>());
-		Pauta pauta2 = new Pauta(null, new Date(), "Reunião 002", "Descrição 002", null, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<Voto>());
+		Pauta pauta1 = new Pauta(null, new Date(), "Reunião 001", "Descrição 001", 5, LocalDateTime.of(2021, Month.JUNE, 21, 14, 33), LocalDateTime.of(2021, Month.JUNE, 21, 14, 45), new ArrayList<ItemPauta>());
+		Pauta pauta2 = new Pauta(null, new Date(), "Reunião 002", "Descrição 002", null, LocalDateTime.now(), LocalDateTime.now(), new ArrayList<ItemPauta>());
 		
 		Arrays.asList(pauta1, pauta2).stream().forEach(p -> {
 			service.insert(p);	

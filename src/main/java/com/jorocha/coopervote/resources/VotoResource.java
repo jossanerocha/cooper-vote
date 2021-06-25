@@ -57,16 +57,19 @@ public class VotoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@ApiOperation(value = "Insere o voto em uma pauta")
+	@ApiOperation(value = "Insere o voto em um item da pauta")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Voto inserido"),
 		    @ApiResponse(code = 403, message = "Sem permissão para inserir o voto"),
 		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})		
 	@RequestMapping(method=RequestMethod.POST)
- 	public ResponseEntity<Void> insert(@NonNull @NotEmpty @RequestParam(value = "idPauta") String idPauta, @NonNull @RequestBody VotoDTO votoDTO) {
+ 	public ResponseEntity<Void> insert(
+ 			@NonNull @NotEmpty @RequestParam(value = "idPauta") String idPauta,
+ 			@NonNull @NotEmpty @RequestParam(value = "idItemPauta") String idItemPauta,
+ 			@NonNull @RequestBody VotoDTO votoDTO) {
 		Voto voto = service.fromDTO(votoDTO);
-		voto = service.insert(voto, idPauta);
+		voto = service.insert(voto, idPauta, idItemPauta);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(voto.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}

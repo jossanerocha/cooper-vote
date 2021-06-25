@@ -5,23 +5,25 @@ import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="voto")
+@Document
 public class Voto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String id;
 	private String indVoto;
-	private Associado associado;
+	private String idItemPauta;
+	private String idAssociado;
 	
 	public Voto() {
 	}
 
-	public Voto(String id, String indVoto, Associado associado) {
+	public Voto(String id, String indVoto, String idItemPauta, String idAssociado) {
 		super();
 		this.id = id;
 		this.indVoto = indVoto;
-		this.associado = associado;
+		this.idItemPauta = idItemPauta;
+		this.idAssociado = idAssociado;
 	}
 
 	public String getId() {
@@ -40,12 +42,20 @@ public class Voto implements Serializable {
 		this.indVoto = indVoto;
 	}
 
-	public Associado getAssociado() {
-		return associado;
+	public String getIdItemPauta() {
+		return idItemPauta;
 	}
 
-	public void setAssociado(Associado associado) {
-		this.associado = associado;
-	}	
+	public void setIdItemPauta(String idItemPauta) {
+		this.idItemPauta = idItemPauta;
+	}
+
+	public String getIdAssociado() {
+		return idAssociado;
+	}
+
+	public void setIdAssociado(String idAssociado) {
+		this.idAssociado = idAssociado;
+	}		
 
 }

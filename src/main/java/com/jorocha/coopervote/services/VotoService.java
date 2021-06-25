@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.jorocha.coopervote.domain.Associado;
+import com.jorocha.coopervote.domain.ItemPauta;
 import com.jorocha.coopervote.domain.Pauta;
 import com.jorocha.coopervote.domain.Voto;
 import com.jorocha.coopervote.dto.UserInfo;
@@ -39,6 +41,9 @@ public class VotoService {
 	@Autowired
 	private PautaService pautaService;	
 	
+	@Autowired
+	private AssociadoService associadoService;		
+	
 	/**
 	 * Lista os votos de todas as pautas
 	 *
@@ -67,25 +72,31 @@ public class VotoService {
 	 * @param idPauta
 	 * @return Voto
 	 */		
-	public Voto insert(Voto voto, String idPauta) {
-		verificarVotacaoPauta(idPauta, voto.getAssociado().getCpf());
+	public Voto insert(Voto voto, String idPauta, String idItemPauta) {
+		Associado associado = getAssociado(voto);
+		verificarVotacaoPauta(idPauta, idItemPauta, associado.getCpf());
 		
 		verificarTipoVoto(voto);
 		
 		try {
-			String json = restTemplate.getForObject(URL_USER_INFO.concat(voto.getAssociado().getCpf()), String.class);
+			String json = restTemplate.getForObject(URL_USER_INFO.concat(associado.getCpf()), String.class);
 			UserInfo userInfo = JSONUtils.json2Object(json, UserInfo.class);
 			if(userInfo != null && userInfo.isAbleToVote()) {
 				return votoRepository.insert(voto);
 			}else {
-				LOG.error("Associado não habilitado para votar: ".concat(voto.getAssociado().getCpf()));
+				LOG.error("Associado não habilitado para votar: ".concat(associado.getCpf()));
 				throw new UnableToVoteException();
 			}
 			
 		} catch (Exception e) {
-			LOG.error("CPF não encontrado: ".concat(voto.getAssociado().getCpf()));
+			LOG.error("CPF não encontrado: ".concat(associado.getCpf()));
 			throw new CpfInvalidoException("CPF não encontrado");
 		}
+	}
+
+	private Associado getAssociado(Voto voto) {
+		Associado associado = associadoService.findById(voto.getIdAssociado());
+		return associado;
 	}
 
 	public void verificarTipoVoto(Voto voto) {
@@ -100,10 +111,11 @@ public class VotoService {
 	 * Valida se o associado já votou
 	 *
 	 * @param idPauta
+	 * @param idItemPauta
 	 * @param cpfAssociado
 	 * @return void
 	 */	
-	private void verificarVotacaoPauta(String idPauta, String cpfAssociado) {
+	private void verificarVotacaoPauta(String idPauta, String idItemPauta, String cpfAssociado) {
 		Pauta pauta = pautaService.findById(idPauta);
 		if(pauta == null) {
 			LOG.error("Pauta não encontrada: ".concat(idPauta));
@@ -118,7 +130,14 @@ public class VotoService {
 		if(LocalDateTime.now().isBefore(pauta.getInicioSessao())) throw new PautaFechadaException("Votação não iniciada");
 		if(LocalDateTime.now().isAfter(pauta.getFimSessao())) throw new PautaFechadaException("Votação encerrada");
 		
-		Voto voto = pauta.getVotos().stream().filter(v -> v.getAssociado().getCpf().equalsIgnoreCase(cpfAssociado)).findFirst().orElse(null);
+		ItemPauta itemPauta = pauta.getItens().stream().filter(i -> i.getId() == idItemPauta).findFirst().orElse(null);
+		
+		Voto voto = itemPauta.getVotos().stream().filter(v -> {
+			Associado associado = getAssociado(v);
+			if(associado.getCpf().equalsIgnoreCase(cpfAssociado)) return Boolean.TRUE;
+			else return Boolean.FALSE;
+		}).findFirst().orElse(null); 
+				
 		if(voto != null) {
 			LOG.error("Associado já votou: ".concat(cpfAssociado));
 			throw new VotoException("Associado já votou");
@@ -159,8 +178,9 @@ public class VotoService {
 	 */		
 	private void updateData(Voto newVoto, Voto voto) {
 		verificarTipoVoto(voto);
+		Associado associado = getAssociado(voto);
 		newVoto.setIndVoto(voto.getIndVoto());
-		newVoto.setAssociado(voto.getAssociado());
+		newVoto.setIdAssociado(associado.getId());
 	}
 
 	/**
@@ -170,6 +190,6 @@ public class VotoService {
 	 * @return Voto
 	 */	
 	public Voto fromDTO(VotoDTO votoDTO) {
-		return new Voto(votoDTO.getId(), votoDTO.getIndVoto(), votoDTO.getAssociado());
+		return new Voto(votoDTO.getId(), votoDTO.getIndVoto(), votoDTO.getIdItemPauta(), votoDTO.getIdAssociado());
 	}
 }

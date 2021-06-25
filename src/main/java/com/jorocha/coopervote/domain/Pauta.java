@@ -29,13 +29,13 @@ public class Pauta implements Serializable {
 	private LocalDateTime inicioSessao;
 	private LocalDateTime fimSessao;
 	
-	@DBRef()
-	private List<Voto> votos = new ArrayList<>();
+	@DBRef(lazy = true)
+	private List<ItemPauta> itens = new ArrayList<>();
 	
 	public Pauta() {
 	}
 
-	public Pauta(String id, Date data, String titulo, String descricao, Integer duracaoSessao, LocalDateTime inicioSessao, LocalDateTime fimSessao, List<Voto> votos) {
+	public Pauta(String id, Date data, String titulo, String descricao, Integer duracaoSessao, LocalDateTime inicioSessao, LocalDateTime fimSessao, List<ItemPauta> itens) {
 		super();
 		this.id = id;
 		this.data = data;
@@ -44,7 +44,7 @@ public class Pauta implements Serializable {
 		this.duracaoSessao = duracaoSessao;
 		this.inicioSessao = inicioSessao;
 		this.fimSessao = fimSessao;
-		this.getVotos().addAll(votos);
+		this.getItens().addAll(itens);
 	}
 	
 	public String getId() {
@@ -79,12 +79,12 @@ public class Pauta implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public List<Voto> getVotos() {
-		return votos;
+	public List<ItemPauta> getItens() {
+		return itens;
 	}
 
-	public void setVotos(List<Voto> votos) {
-		this.votos = votos;
+	public void setItens(List<ItemPauta> itens) {
+		this.itens = itens;
 	}
 
 	public Integer getDuracaoSessao() {

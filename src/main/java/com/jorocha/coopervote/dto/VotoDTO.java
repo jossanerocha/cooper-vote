@@ -10,22 +10,24 @@ public class VotoDTO implements Serializable {
 
 	private String id;
 	private String indVoto;
-	private Associado associado;
+	private String idItemPauta;
+	private String idAssociado;
 	
 	public VotoDTO() {
 	}
 	
 	public VotoDTO(Voto voto) {
 		this.id = voto.getId();
-		this.indVoto = voto.getIndVoto();
-		this.associado = voto.getAssociado();
+		this.idItemPauta = voto.getIdItemPauta();
+		this.idAssociado = voto.getIdAssociado();
 	}
 
-	public VotoDTO(String id, String indVoto, Associado associado) {
+	public VotoDTO(String id, String indVoto, String idItemPauta, String idAssociado) {
 		super();
 		this.id = id;
 		this.indVoto = indVoto;
-		this.associado = associado;
+		this.idItemPauta = idItemPauta;
+		this.idAssociado = idAssociado;
 	}
 
 	public VotoDTO(Associado obj) {
@@ -48,13 +50,20 @@ public class VotoDTO implements Serializable {
 		this.indVoto = indVoto;
 	}
 
-	public Associado getAssociado() {
-		return associado;
+	public String getIdItemPauta() {
+		return idItemPauta;
 	}
 
-	public void setAssociado(Associado associado) {
-		this.associado = associado;
+	public void setIdItemPauta(String idItemPauta) {
+		this.idItemPauta = idItemPauta;
 	}
-	
+
+	public String getIdAssociado() {
+		return idAssociado;
+	}
+
+	public void setIdAssociado(String idAssociado) {
+		this.idAssociado = idAssociado;
+	}	
 
 }

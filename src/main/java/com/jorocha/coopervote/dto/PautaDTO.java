@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.jorocha.coopervote.domain.ItemPauta;
 import com.jorocha.coopervote.domain.Pauta;
-import com.jorocha.coopervote.domain.Voto;
 
 public class PautaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -16,14 +16,10 @@ public class PautaDTO implements Serializable {
 	private Date data;
 	private String titulo;
 	private String descricao;
-	private Integer totalVotos;
-	private Long totalVotosSim;
-	private Long totalVotosNao;
-	private String resultado;
 	private Integer duracaoSessao;
 	private LocalDateTime inicioSessao;
 	private LocalDateTime fimSessao;	
-	private List<Voto> votos = new ArrayList<>();
+	private List<ItemPauta> itens = new ArrayList<>();
 	
 	public PautaDTO() {
 		super();
@@ -33,15 +29,11 @@ public class PautaDTO implements Serializable {
 		this.id = pauta.getId();
 		this.data = pauta.getData();
 		this.titulo = pauta.getTitulo();
-		this.descricao = pauta.getDescricao();
-		this.totalVotos = pauta.getVotos().size();
-		this.totalVotosSim = pauta.getVotos().stream().filter(v -> v.getIndVoto().equalsIgnoreCase("Sim")).count();
-		this.totalVotosNao = pauta.getVotos().stream().filter(v -> v.getIndVoto().equalsIgnoreCase("Não")).count();
-		this.resultado = this.totalVotosSim > this.totalVotosNao ? "Aprovado" : this.totalVotosNao > this.totalVotosSim ? "Reprovado" : "";		
+		this.descricao = pauta.getDescricao();		
 		this.duracaoSessao = pauta.getDuracaoSessao();
 		this.inicioSessao = pauta.getInicioSessao();
 		this.fimSessao = pauta.getFimSessao();
-		this.getVotos().addAll(pauta.getVotos());		
+		this.getItens().addAll(pauta.getItens());		
 	}
 
 	public String getId() {
@@ -76,38 +68,6 @@ public class PautaDTO implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Integer getTotalVotos() {
-		return totalVotos;
-	}
-
-	public void setTotalVotos(Integer totalVotos) {
-		this.totalVotos = totalVotos;
-	}
-
-	public Long getTotalVotosSim() {
-		return totalVotosSim;
-	}
-
-	public void setTotalVotosSim(Long totalVotosSim) {
-		this.totalVotosSim = totalVotosSim;
-	}
-
-	public Long getTotalVotosNao() {
-		return totalVotosNao;
-	}
-
-	public void setTotalVotosNao(Long totalVotosNao) {
-		this.totalVotosNao = totalVotosNao;
-	}
-
-	public String getResultado() {
-		return resultado;
-	}
-
-	public void setResultado(String resultado) {
-		this.resultado = resultado;
-	}
-
 	public Integer getDuracaoSessao() {
 		return duracaoSessao;
 	}
@@ -115,15 +75,15 @@ public class PautaDTO implements Serializable {
 	public void setDuracaoSessao(Integer duracaoSessao) {
 		this.duracaoSessao = duracaoSessao;
 	}
-
-	public List<Voto> getVotos() {
-		return votos;
+	
+	public List<ItemPauta> getItens() {
+		return itens;
 	}
 
-	public void setVotos(List<Voto> votos) {
-		this.votos = votos;
-	}	
-	
+	public void setItens(List<ItemPauta> itens) {
+		this.itens = itens;
+	}
+
 	public LocalDateTime getInicioSessao() {
 		return inicioSessao;
 	}
