@@ -10,18 +10,6 @@
 
 <p align="left">Consiste em uma aplicação para administração de assembléias, onde cada associado possui um voto por item pautado.</p>
 
-<p align="left">Optei por Graddle e MongoDB mesmo não sendo o que uso habitualmente, porque preferi encarar como desafio. 
-</p>
-
-<p align="left">No geral, busquei seguir as orientações dos documentos que recebi.</p>
-
-
-<p align="left">Sobre versionamento, eu costumo utilizar branches master, hom, tes e dev. Além disso, utilizaria o processo estabelecido pelo Git Flow.</p>
-
-<p align="left">Não realizei teste de performance, pois nas equipes onde atuei havia profissionais dedicados apenas aos testes. No entando, estou disponível para desenvolver essa habilidade. </p>
-
-<p align="left">Até mais!</p>
-
 <p align="left">Lista de CPF's (máximo 50) para utilização na <a href="https://www.gov.br/conecta/catalogo/apis/cadastro-base-do-cidadao-cbc-cpf/swagger_view">API CPF Light<a/></p>
 
 <ul>
